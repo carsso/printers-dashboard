@@ -1,0 +1,216 @@
+:root {
+    --bg:        #0f1419;
+    --card-bg:   #1a1f2a;
+    --card-bg2:  #232936;
+    --border:    #2a3140;
+    --text:      #e6edf3;
+    --muted:     #8b95a8;
+    --accent:    #4f9fff;
+    --danger:    #f85149;
+    --ok:        #3fb950;
+    --warn:      #d29922;
+    --offline:   #6e7781;
+    --bar-bg:    #2a3140;
+    --radius:    8px;
+    --shadow:    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 24px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+
+.muted { color: var(--muted); font-size: 12px; }
+
+button {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--card-bg2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease;
+}
+
+button:hover { background: #2c3344; border-color: #3a4256; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Dashboard grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px;
+}
+.hidden { display: none !important; }
+
+/* Printer card */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.card-title { min-width: 0; flex: 1; }
+
+.card-model {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-meta {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.card-meta .sep::before { content: "·"; margin-right: 8px; }
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #0f1419;
+    background: var(--muted);
+    white-space: nowrap;
+}
+.badge.idle       { background: var(--ok); }
+.badge.processing { background: var(--accent); color: #fff; }
+.badge.warmup     { background: var(--warn); }
+.badge.stopped    { background: var(--danger); color: #fff; }
+.badge.offline    { background: var(--offline); color: #fff; }
+.badge.unknown    { background: var(--muted); }
+
+/* Marker bars */
+.markers { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+
+.marker {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    align-items: center;
+}
+
+.marker-name {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.marker-pct {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.marker-bar {
+    grid-column: 1 / -1;
+    height: 8px;
+    background: var(--bar-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.marker-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width .3s ease;
+}
+
+.reasons {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.reason-chip {
+    background: rgba(210, 153, 34, 0.15);
+    color: #e8c468;
+    border: 1px solid rgba(210, 153, 34, 0.35);
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 12px;
+}
+
+.error-line {
+    margin-top: 10px;
+    color: var(--danger);
+    font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    .topbar { padding: 12px 16px; }
+    main { padding: 16px; }
+}
