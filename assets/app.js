@@ -76,6 +76,7 @@
                 markers: [],
                 state_reasons: [],
                 device_name: prev.device_name || null,
+                device_model: prev.device_model || null,
                 error: err.name === "AbortError"
                     ? "request timed out (" + (FETCH_TIMEOUT / 1000) + "s)"
                     : err.message,
@@ -95,13 +96,14 @@
             <div class="card-header">
                 <div class="card-title">
                     <h2>${esc(p.name)}</h2>
-                    ${snap.device_name ? `<div class="card-model">${esc(snap.device_name)}</div>` : ""}
+                    ${snap.device_name ? `<div class="card-name">${esc(snap.device_name)}</div>` : ""}
+                    ${snap.device_model ? `<div class="card-model">Model: ${esc(snap.device_model)}</div>` : ""}
                 </div>
                 <span class="badge ${status.cls}">${esc(status.label)}</span>
             </div>
             <div class="card-meta">
-                <span>${esc(p.ip)}</span>
-                <span class="sep" data-polled-at="${snap.polled_at || 0}">${lastSeen(snap.polled_at)}</span>
+                <span>IP: ${esc(p.ip)}</span>
+                <span class="sep">Last polled: <span data-polled-at="${snap.polled_at || 0}">${lastSeen(snap.polled_at)}</span></span>
             </div>
             <div class="markers">${(snap.markers || []).map(marker).join("")}</div>
             ${reasons(snap.state_reasons)}

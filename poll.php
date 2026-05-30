@@ -143,10 +143,8 @@ function ipp_snapshot(\obray\ipp\PrinterAttributes $attrs): array
         'status'        => $stateLabel,
         'state_reasons' => $reasons,
         'markers'       => $markers,
-        'device_name'   => first_string(
-            ipp_get($attrs, 'printer-make-and-model'),
-            ipp_get($attrs, 'printer-name')
-        ),
+        'device_model'  => ipp_get($attrs, 'printer-make-and-model'),
+        'device_name'   => ipp_get($attrs, 'printer-name'),
     ];
 }
 
