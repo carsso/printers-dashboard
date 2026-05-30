@@ -31,6 +31,14 @@
         buildGrid();
         pollAll();
         setInterval(pollAll, REFRESH_MS);
+        setInterval(tickLastSeen, 1000);
+    }
+
+    function tickLastSeen() {
+        for (const el of document.querySelectorAll("[data-polled-at]")) {
+            const ts = Number(el.dataset.polledAt) || 0;
+            el.textContent = lastSeen(ts);
+        }
     }
 
     function buildGrid() {
@@ -93,7 +101,7 @@
             </div>
             <div class="card-meta">
                 <span>${esc(p.ip)}</span>
-                <span class="sep">${lastSeen(snap.polled_at)}</span>
+                <span class="sep" data-polled-at="${snap.polled_at || 0}">${lastSeen(snap.polled_at)}</span>
             </div>
             <div class="markers">${(snap.markers || []).map(marker).join("")}</div>
             ${reasons(snap.state_reasons)}
